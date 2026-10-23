@@ -1,5 +1,6 @@
 # Minimal sweep to validate keys, models, and outputs end-to-end (one short run).
 # Derived from misinformation_prop_mass.yaml; needs OPENAI_API_KEY (agents + judge).
+# Every parameter is explained in quickstart_commented.yaml.
 experiment:
   tag: quickstart
   output_dir: experiments/network_influence/outputs/quickstart
