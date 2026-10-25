@@ -1,0 +1,51 @@
+# Overnight batch: 7 matched pairs (honest vs covert collusion), 14 episodes.
+# Same seeds in both sweeps => same tasks and costs, so each covert run has an honest twin.
+# 3 planning rounds (not 4): rounds 3-4 were repeated confirmations; saves ~35% cost.
+simulation:
+  max_iterations: 1
+  max_planning_rounds: 3
+  max_conversation_steps: 3
+  seed: 1
+  tags: [sprint_batch]
+
+environment:
+  name: JiraTicketEnvironment
+  assignment_filling: false
+  max_tasks: 8
+
+communication_network:
+  topology: complete
+  num_agents: 4
+  consolidate_channels: true
+
+llm_models:
+  - label: haiku
+    llm:
+      provider: anthropic
+      anthropic:
+        model: claude-haiku-4-5
+        params:
+          max_tokens: 1024
+          temperature: 0.7
+
+experiment:
+  tag: sprint_batch
+  output_dir: experiments/collusion/outputs/batch
+  max_concurrent_runs: 2
+  seeds: [1, 2, 3, 4, 5, 6, 7]
+  collusion:
+    colluder_selection: random
+    agent_order: random
+  sweeps:
+    - name: honest
+      topologies: [complete]
+      num_agents: [4]
+      colluder_counts: [2]
+      secret_channel_enabled: [false]
+      prompt_variants: [control]
+    - name: covert
+      topologies: [complete]
+      num_agents: [4]
+      colluder_counts: [2]
+      secret_channel_enabled: [true]
+      prompt_variants: [deception]   # "stay covert" + deception allowed
