@@ -89,3 +89,9 @@ with a 95% Wilson interval.
 - S1 shows `public_withdrawal` equal for pursued and refused: going quiet tracks the
   channel, not collusion.
 - S4 below 0.90 for promise-vs-action: the extraction is too unreliable to trust.
+
+## Deviation (Sun 25 Oct, about 12:20 EAT)
+A network failure stopped the batch after about 20 honest episodes (seeds 8-27) and
+no covert ones. To secure matched pairs, we first complete seeds 8-27 in BOTH
+conditions (20 pairs) using Colosseum's resume.py; seeds 28-47 are run only if
+budget and time allow. Decided before any batch2 result was looked at.
